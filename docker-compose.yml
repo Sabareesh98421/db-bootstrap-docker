@@ -1,0 +1,20 @@
+# version: "3.9"
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: fms_postgres
+    environment:
+      POSTGRES_USER: postgres           # container admin
+      POSTGRES_PASSWORD: adminpass      # admin password
+      POSTGRES_DB: fms_project          # dynamic DB name
+      ORM_USER: java                     # dynamic ORM username
+      ORM_PASSWORD: java_pass            # dynamic ORM password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./role_init.sql:/docker-entrypoint-initdb.d/init_role.sql
+
+volumes:
+  pgdata: {} 
