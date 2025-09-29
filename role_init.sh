@@ -18,7 +18,7 @@ DO
 \$do\$
 BEGIN
    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '$ORM_USER') THEN
-      EXECUTE 'CREATE USER $ORM_USER WITH PASSWORD ' || quote_literal('$ORM_PASSWORD');
+      EXECUTE 'CREATE USER ' || quote_ident($ORM_USER) || ' WITH PASSWORD ' || quote_literal($ORM_PASSWORD);
    END IF;
 END
 \$do\$;
@@ -28,6 +28,9 @@ GRANT CONNECT ON DATABASE "$POSTGRES_DB" TO "$ORM_USER";
 GRANT CREATE ON SCHEMA public TO "$ORM_USER";
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO "$ORM_USER";
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO "$ORM_USER";
+ 
+-- Set the database timezone to Asia/Kolkata
+ALTER DATABASE "$POSTGRES_DB" SET timezone TO 'Asia/Kolkata';
 EOSQL
-
-echo "ORM user setup completed."
+ 
+echo "ORM user setup and timezone configuration completed."

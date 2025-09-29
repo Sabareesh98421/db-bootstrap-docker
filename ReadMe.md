@@ -1,6 +1,6 @@
 ## Commands to run
 
-##### \* Start services:
+##### * Start services:
 
 ```bash
   	docker compose up --build -d
@@ -12,7 +12,7 @@
 docker ps -a
 ```
 
-##### Start container:
+##### Start  container:
 
 ```
 docker start <containerID or Name >
@@ -45,4 +45,4 @@ docker volume rm <volume_name>
 
 ## Command to delete a container:
 
--   [ ] `docker rm <container_name>`
+ `docker rm <container_name>`

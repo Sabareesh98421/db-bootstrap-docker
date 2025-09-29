@@ -5,6 +5,7 @@ services:
         image: postgres:13
         container_name: fms_postgres
         environment:
+            TZ: Asia/Kolkata
             POSTGRES_USER: postgres # container admin
             POSTGRES_PASSWORD: adminpass # admin password
             POSTGRES_DB: fms # dynamic DB name
